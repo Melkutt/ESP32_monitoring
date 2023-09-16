@@ -16,8 +16,8 @@ gc.collect()
 
 from time import ticks_ms
 
-AP_NAME = 'Gumbalde_IoT'
-AP_PASS = 'stanga719'
+AP_NAME = 'SSID'
+AP_PASS = 'PASSW'
 WIFI_TIMEOUT = 60
 
 print('Connecting...')
