@@ -33,20 +33,5 @@ if (wlan.isconnected()):
 else:
     print('Timeout!')
 
-#ssid = 'Gumbalde_IoT'
-#password = 'stanga719'
-
-#station = network.WLAN(network.STA_IF)
-
-#station.active(True)
-#station.connect(ssid, password)
-
-#while station.isconnected() == False:
-#  pass
-
-#print('Connection successful')
-#print(station.ifconfig())
-
 sensor = dht.DHT22(Pin(18))
-#sensor = dht.DHT11(Pin(14))
 
