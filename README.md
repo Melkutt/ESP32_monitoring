@@ -1,6 +1,6 @@
 # ESP32_monitoring
 
-#Under under construction!!!!!
+# Under construction!!!!!
 
 
 Monitoring voltage, temperature and humidity and present it on a web server. 
