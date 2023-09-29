@@ -2,6 +2,8 @@
 
 <h2> My first alpha relese! </h2>
 
+![alt text](https://raw.githubusercontent.com/Melkutt/ESP32_monitoring/main/src/Git_Pic.bmp)
+
 Monitoring voltage, temperature and humidity and present it on a web server. 
 This is built with a Adafruit ESP32 QT board and a DHT11 sensor. 
 It's writen in Arduino IDE.
