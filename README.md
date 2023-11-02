@@ -19,5 +19,7 @@ with DHT11 sensor.
 <br>
 I haved to add <code>size_t mp_task_heap_size = heap_caps_get_largest_free_block(MALLOC_CAP_8BIT) - 32*1024</code> to make it work with the S2 chip.
 
+Almost <i class="fa-regular fa-bug"></i> free =)
+
 
 More info is coming!
