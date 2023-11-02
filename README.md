@@ -5,7 +5,7 @@
 2023-11-02 Updated with some new features.
 
 Monitoring voltage, temperature and humidity and present it on a web server. 
-This is built with a Adafruit ESP32 QT board and a DHT11 sensor. 
+This is built with a <a href="https://learn.adafruit.com/adafruit-qt-py-esp32-s3/pinouts">Adafruit ESP32 QT</a> board and a DHT11 sensor, but this code will almost certainly work in many others MCU's.
 It's writen in Arduino IDE.
 <br>
 <br>
