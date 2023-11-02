@@ -8,7 +8,10 @@ Monitoring voltage, temperature and humidity and present it on a web server.
 This is built with a Adafruit ESP32 QT board and a DHT11 sensor. 
 It's writen in Arduino IDE.
 <br>
+<br>
+<br>
 ![alt text](https://raw.githubusercontent.com/Melkutt/ESP32_monitoring/main/src/New_Git_Pic.bmp)
+<br>
 <br>
 
 It's based on <a href="https://randomnerdtutorials.com/esp32-dht11-dht22-temperature-humidity-web-server-arduino-ide/">Rui Santos</a> tutorial on ESP32 web server
