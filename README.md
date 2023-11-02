@@ -1,6 +1,6 @@
 # ESP32_monitoring
 
-<h2> Still a alpha relese </h2>
+<h2> Still a α-relese </h2>
 
 2023-11-02 Updated with some new features.
 
