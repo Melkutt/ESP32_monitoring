@@ -1,6 +1,8 @@
 /*********
-  Rui Santos
-  Complete project details at https://randomnerdtutorials.com  
+Original created by: Rui Santos, complete project details at https://randomnerdtutorials.com  
+
+Latest rebuilt by Melker H 2024-12-05
+https://github.com/Melkutt/ESP32_monitoring/
 *********/
 
 // Import required libraries
@@ -15,19 +17,18 @@ size_t mp_task_heap_size = heap_caps_get_largest_free_block(MALLOC_CAP_8BIT) - 3
 const char* ssid = "SSID";
 const char* password = "PASSW";
 
-#define DHTPIN 18     // Digital pin connected to the DHT sensor
+#define DHTPIN D0     // GPIO18/A0/D0/
 
 // Uncomment the type of sensor in use:
-#define DHTTYPE    DHT11     // DHT 11
-//#define DHTTYPE    DHT22     // DHT 22 (AM2302)
-//#define DHTTYPE    DHT21     // DHT 21 (AM2301)
+//#define DHTTYPE    DHT11     // DHT 11 (AM2301)
+#define DHTTYPE    DHT22     // DHT 22 (AM2302)
 
 DHT dht(DHTPIN, DHTTYPE);
 
-#define ADC1 9 //A2
-#define ADC2 8 //A3
-#define ADC3 7 //SDA
-#define PTT 35 //MOSI pin
+#define ADC1 9 // GPIO9/A2/D2
+#define ADC2 8 // GPIO8/A3/D3
+#define ADC3 7 // GPIO7/A4/D4/SDA
+#define PTT  6 // GPIO6/A5/D5/SCL pin
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
@@ -91,7 +92,7 @@ String ADC2raw() {
 }
 
 String ADC3raw() {
-)
+
   analogReadResolution(12);
   float v2 = analogRead(ADC3) * (8.25 / 4095.0); //Resistor divider 3k3 and 2k2 = 8.25V divied to 3.3V
   if (isnan(v2)) {
@@ -106,16 +107,22 @@ String ADC3raw() {
 
 String PTT_in() {
  
-  int val1 = digitalRead(PTT);
+  int p0 = digitalRead(PTT);
+  //PTTval = digitaRead(PTT);
+  ////int PTTval = PTT;
 
-  if (digitalRead(PTT == 1)){
-   Serial.println(val1);
+  if (p0 == 1) {         
+   Serial.println("TX"); 
    return String("TX");
   }
-  else {
-   Serial.println(val1);
+  if (p0 == 0) {
+   Serial.println("RX"); 
    return String("RX");
   }
+  else{
+   Serial.println("It's fuckd up!"); 
+   return String("ERROR");
+  } 
 }
 
 const char index_html[] PROGMEM = R"rawliteral(
@@ -198,7 +205,7 @@ const char index_html[] PROGMEM = R"rawliteral(
   </p>
 
   <p>
-  <i class="fa-solid fa-microphone" style="color:#00add6;"></i>
+  <i class="fa-solid fa-radio"style="color:#00add6;"></i>
   <span class="dht-labels">PTT</span>
   <span id="voltage">%PTT%</span>
   
@@ -266,7 +273,7 @@ setInterval(function ( ) {
       document.getElementById("PTT").innerHTML = this.responseText;
     }
   };
-  xhttp.open("GET", "/PTT", true);
+  xhttp.open("GET", "/ptt", true);
   xhttp.send();
 }, 10000 ) ;
 
@@ -302,12 +309,12 @@ void setup(){
   Serial.begin(115200);
 
   dht.begin();
-  pinMode(PTT, INPUT_PULLDOWN);
+  pinMode(PTT, INPUT); //INPUT_PULLDOWN, 
   
   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
+    delay(500);
     Serial.println("Connecting to WiFi..");
   }
 
@@ -335,7 +342,7 @@ void setup(){
     request->send_P(200, "text/plain", ADC2raw().c_str());
   });
 
-    server.on("/ptt", HTTP_GET, [](AsyncWebServerRequest *request){
+    server.on("/ptt", HTTP_GET, [](AsyncWebServerRequest *request){  
     request->send_P(200, "text/plain", PTT_in().c_str());
   });
 
